@@ -26,14 +26,8 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
-
-  deploy:
+      
+   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -54,3 +48,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_40B09ACBB2CC4E0B815E51894168717D }}
           package: '*.jar'
+
